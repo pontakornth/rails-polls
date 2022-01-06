@@ -2,8 +2,8 @@
 
 one:
   choice_text: MyString
-  votes: 
+  votes: 1
 
 two:
   choice_text: MyString
-  votes: 
+  votes: 1
