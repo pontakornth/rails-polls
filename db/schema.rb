@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_06_084552) do
+ActiveRecord::Schema.define(version: 2022_01_06_085251) do
 
   create_table "choices", force: :cascade do |t|
     t.string "choice_text"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2022_01_06_084552) do
     t.string "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "end_date"
   end
 
   create_table "users", force: :cascade do |t|
