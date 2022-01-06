@@ -1,9 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+past_question:
   question_text: MyString
   description: MyString
+  end_date: <%= Time.now - 9.hours %>
 
-two:
+future_question:
   question_text: MyString
   description: MyString
+  end_date: <%= Time.now + 1.days %>

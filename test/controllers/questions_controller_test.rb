@@ -1,48 +1,48 @@
-require "test_helper"
+require 'test_helper'
 
 class QuestionsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @question = questions(:one)
+    @past_question = questions(:past_question)
+    @future_question = questions(:future_question)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get questions_url
     assert_response :success
   end
 
-  test "should get new" do
-    get new_question_url
+  test 'should get result' do
+    get result_url(@past_question)
     assert_response :success
   end
 
-  test "should create question" do
-    assert_difference('Question.count') do
-      post questions_url, params: { question: { description: @question.description, question_text: @question.question_text } }
-    end
+  #   assert_difference('Question.count') do
+  #     post questions_url, params: { question: { description: @question.description, question_text: @question.question_text } }
+  #   end
 
-    assert_redirected_to question_url(Question.last)
-  end
+  #   assert_redirected_to question_url(Question.last)
+  # end
 
-  test "should show question" do
-    get question_url(@question)
-    assert_response :success
-  end
+  # test "should show question" do
+  #   get question_url(@question)
+  #   assert_response :success
+  # end
 
-  test "should get edit" do
-    get edit_question_url(@question)
-    assert_response :success
-  end
+  # test "should get edit" do
+  #   get edit_question_url(@question)
+  #   assert_response :success
+  # end
 
-  test "should update question" do
-    patch question_url(@question), params: { question: { description: @question.description, question_text: @question.question_text } }
-    assert_redirected_to question_url(@question)
-  end
+  # test "should update question" do
+  #   patch question_url(@question), params: { question: { description: @question.description, question_text: @question.question_text } }
+  #   assert_redirected_to question_url(@question)
+  # end
 
-  test "should destroy question" do
-    assert_difference('Question.count', -1) do
-      delete question_url(@question)
-    end
+  # test "should destroy question" do
+  #   assert_difference('Question.count', -1) do
+  #     delete question_url(@question)
+  #   end
 
-    assert_redirected_to questions_url
-  end
+  #   assert_redirected_to questions_url
+  # end
 end
