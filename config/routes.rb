@@ -4,5 +4,6 @@ Rails.application.routes.draw do
   resources :questions, only: %i[index show]
   # get 'questions#result'
   get '/questions/:id/result', to: 'questions#result', as: 'result'
+  post '/questions/:id/vote', to: 'questions#vote', as: 'vote'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

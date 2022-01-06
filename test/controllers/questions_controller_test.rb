@@ -16,6 +16,17 @@ class QuestionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test 'should show the question that is not ended in the detail' do
+    get question_url(@future_question)
+    assert_response :success
+  end
+
+  test 'should show voting when question is available' do
+    get question_url(@past_question)
+    assert_response :redirect
+    assert_redirected_to result_url(@past_question)
+  end
+
   #   assert_difference('Question.count') do
   #     post questions_url, params: { question: { description: @question.description, question_text: @question.question_text } }
   #   end

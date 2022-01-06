@@ -20,6 +20,9 @@ class QuestionsController < ApplicationController
   # GET /questions/1/result
   def result; end
 
+  # POST /questions/1/vote
+  def vote; end
+
   # POST /questions or /questions.json
   def create
     @question = Question.new(question_params)
