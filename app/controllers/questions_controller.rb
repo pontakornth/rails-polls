@@ -18,10 +18,14 @@ class QuestionsController < ApplicationController
   def edit; end
 
   # GET /questions/1/result
-  def result; end
+  def result
+    @question = Question.find(params[:id])
+  end
 
   # POST /questions/1/vote
-  def vote; end
+  def vote
+    redirect_to result_path(params[:id])
+  end
 
   # POST /questions or /questions.json
   def create
