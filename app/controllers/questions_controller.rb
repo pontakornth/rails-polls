@@ -7,7 +7,9 @@ class QuestionsController < ApplicationController
   end
 
   # GET /questions/1 or /questions/1.json
-  def show; end
+  def show 
+    redirect_to result_path(@question) unless @question.can_vote
+  end
 
   # GET /questions/new
   def new
@@ -24,6 +26,12 @@ class QuestionsController < ApplicationController
 
   # POST /questions/1/vote
   def vote
+    question = Question.find(params[:id])
+    redirect_to result_path(@question) unless question.can_vote
+    choice = question.choices.find(choice_param[:choice_id])
+    choice.votes += 1
+    choice.save
+
     redirect_to result_path(params[:id])
   end
 
@@ -75,5 +83,9 @@ class QuestionsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def question_params
     params.require(:question).permit(:question_text, :description)
+  end
+
+  def choice_param
+    params.permit(:choice_id)
   end
 end

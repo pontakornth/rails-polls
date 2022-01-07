@@ -4,6 +4,7 @@ class QuestionsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @past_question = questions(:past_question)
     @future_question = questions(:future_question)
+    freeze_time
   end
 
   test 'should get index' do
@@ -21,7 +22,7 @@ class QuestionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'should show voting when question is available' do
+  test 'should not be able to vote ended question' do
     get question_url(@past_question)
     assert_response :redirect
     assert_redirected_to result_url(@past_question)
