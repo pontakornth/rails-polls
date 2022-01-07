@@ -1,9 +1,21 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+past_one:
+  question: past_question
   choice_text: MyString
-  votes: 1
+  votes: 0
 
-two:
+past_two:
+  question: past_question
   choice_text: MyString
-  votes: 1
+  votes: 0
+
+future_one:
+  question: future_question
+  choice_text: MyString
+  votes: 0
+  
+future_two:
+  question: future_question
+  choice_text: MyString
+  votes: 0

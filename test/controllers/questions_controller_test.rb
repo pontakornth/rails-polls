@@ -27,6 +27,13 @@ class QuestionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to result_url(@past_question)
   end
 
+  test 'should be able to vote when the question is available' do
+    assert_difference('@future_question.choices.first.votes', 1) do
+      post vote_url(@future_question), params: { choice_id: @future_question.choices.first.id }
+    end
+    assert_redirected_to result_url(@future_question)
+  end
+
   #   assert_difference('Question.count') do
   #     post questions_url, params: { question: { description: @question.description, question_text: @question.question_text } }
   #   end
