@@ -1,10 +1,17 @@
 require 'test_helper'
 
 class QuestionsControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
   setup do
     @past_question = questions(:past_question)
     @future_question = questions(:future_question)
+    @user = users(:one)
     freeze_time
+  end
+
+  # Vote on the question with choice_id
+  def vote(question, choice_id)
+    post vote_url(question), params: { choice_id: choice_id }
   end
 
   test 'should get index' do
@@ -23,16 +30,30 @@ class QuestionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should not be able to vote ended question' do
+    sign_in @user
     get question_url(@past_question)
-    assert_response :redirect
     assert_redirected_to result_url(@past_question)
   end
 
   test 'should be able to vote when the question is available' do
+    sign_in @user
     assert_difference('@future_question.choices.first.votes', 1) do
-      post vote_url(@future_question), params: { choice_id: @future_question.choices.first.id }
+      vote(@future_question, @future_question.choices.first.id)
     end
     assert_redirected_to result_url(@future_question)
+  end
+
+  test 'should not be able to vote when not signed in' do
+    vote(@future_question, @future_question.choices.first.id)
+    assert_redirected_to new_user_session_url
+  end
+
+  test 'each vote should be unique' do
+    sign_in @user
+    vote(@future_question, @future_question.choices.first.id)
+    assert_difference('@future_question.choices.first.votes', -1) do
+      vote(@future_question, @future_question.choices.second.id)
+    end
   end
 
   #   assert_difference('Question.count') do
