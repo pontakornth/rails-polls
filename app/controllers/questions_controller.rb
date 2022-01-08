@@ -7,7 +7,7 @@ class QuestionsController < ApplicationController
   end
 
   # GET /questions/1 or /questions/1.json
-  def show 
+  def show
     redirect_to result_path(@question) unless @question.can_vote
   end
 
