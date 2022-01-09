@@ -16,7 +16,7 @@
     <% @question.choices.each do |choice|%>
 	  <tr>
 	     <td><%= choice.choice_text %></td>
-		 <td> <%= choice.votes %> </td>
+		 <td> <%= choice.votes.count %> </td>
 	  </tr>
 	<% end %>
   </tbody>

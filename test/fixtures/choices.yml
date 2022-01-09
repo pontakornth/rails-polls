@@ -3,19 +3,15 @@
 past_one:
   question: past_question
   choice_text: MyString
-  votes: 0
 
 past_two:
   question: past_question
   choice_text: MyString
-  votes: 0
 
 future_one:
   question: future_question
   choice_text: MyString
-  votes: 0
   
 future_two:
   question: future_question
   choice_text: MyString
-  votes: 0

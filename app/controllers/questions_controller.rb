@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
-  before_action :set_question, only: %i[show edit update destroy]
+  before_action :set_question, only: %i[show edit update destroy vote result]
+  before_action :authenticate_user!, only: %i[vote]
 
   # GET /questions or /questions.json
   def index
@@ -20,18 +21,17 @@ class QuestionsController < ApplicationController
   def edit; end
 
   # GET /questions/1/result
-  def result
-    @question = Question.find(params[:id])
-  end
+  def result; end
 
   # POST /questions/1/vote
   def vote
-    question = Question.find(params[:id])
-    redirect_to result_path(@question) unless question.can_vote
-    choice = question.choices.find(choice_param[:choice_id])
-    choice.votes += 1
-    choice.save
-
+    redirect_to result_path(@question) unless @question.can_vote
+    choice_id = choice_param[:choice_id]
+    choice = @question.choices.find(choice_id)
+    previous_vote = Vote.where(question: @question).where.not(choice: choice).find_by(user: current_user)
+    # If there is previous choice, delete
+    previous_vote&.delete
+    choice.votes.create(user: current_user, question: @question)
     redirect_to result_path(params[:id])
   end
 
