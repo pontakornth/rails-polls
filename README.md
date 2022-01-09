@@ -1,24 +1,15 @@
-# README
+# Rails polls
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Rails polls is pretty same as KU polls but with a different framework. Unlike KU polls, Rails polls do not follow some software process such as having iterations due to Rails application can be developed faster than Django.
 
-Things you may want to cover:
+## Current features
+- Authentication
+- Voting
+- Unique vote per user
 
-* Ruby version
+## Setup 
+To be added
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## TODOS
+- [ ] Refine application style
+- [ ] Add poll creation feature or install admin gem
