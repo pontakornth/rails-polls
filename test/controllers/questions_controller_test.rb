@@ -50,6 +50,8 @@ class QuestionsControllerTest < ActionDispatch::IntegrationTest
   test 'each vote should be unique' do
     sign_in @user
     vote(@future_question, @future_question.choices.first.id)
+    # Vote it twice
+    vote(@future_question, @future_question.choices.second.id)
     vote(@future_question, @future_question.choices.second.id)
     assert_equal @future_question.choices.first.votes.reload.count, 0
     assert_equal @future_question.choices.second.votes.reload.count, 1

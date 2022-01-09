@@ -28,10 +28,16 @@ class QuestionsController < ApplicationController
     redirect_to result_path(@question) unless @question.can_vote
     choice_id = choice_param[:choice_id]
     choice = @question.choices.find(choice_id)
-    previous_vote = Vote.where(question: @question).where.not(choice: choice).find_by(user: current_user)
-    # If there is previous choice, delete
-    previous_vote&.delete
-    choice.votes.create(user: current_user, question: @question)
+    previous_vote = Vote.where(question: @question).find_by(user: current_user)
+    # If there is no previous vote, create one.
+    if !previous_vote
+      choice.votes.create(user: current_user, question: @question)
+    # If it is a different choice, change
+    elsif previous_vote.choice != choice
+      previous_vote.choice = choice
+      previous_vote.save
+    end
+    # Do nothing if it is the same choice
     redirect_to result_path(params[:id])
   end
 
