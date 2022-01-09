@@ -46,6 +46,8 @@ group :development do
   gem 'spring'
   # solargraph
   gem 'solargraph'
+  # Secret in ENV for simplicity. It's also same as the Django KU Polls app.
+  gem 'dotenv-rails'
 end
 
 group :test do
